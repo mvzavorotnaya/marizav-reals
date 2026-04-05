@@ -1,0 +1,241 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+  :root{--green:#2D4A3E;--cream:#F0EBE1;--cream-dark:#E5DDD1;--gold:#A8956A;--gold-light:#C4AE87;--text:#2D4A3E;--text-muted:#6B7F76;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  .wrap{font-family:'Cormorant Garamond',serif;background:var(--cream);color:var(--text);max-width:800px;margin:0 auto;padding:3rem 1.5rem 4rem;}
+  .brand-header{text-align:center;margin-bottom:3.5rem;padding-bottom:2rem;border-bottom:0.5px solid var(--gold-light);}
+  .brand-header h1{font-size:3rem;font-weight:300;letter-spacing:0.08em;color:var(--green);margin-bottom:0.3rem;}
+  .brand-header .subtitle{font-size:0.9rem;letter-spacing:0.22em;color:var(--gold);font-weight:300;font-style:italic;}
+  .global-rules{background:var(--green);border-radius:12px;padding:1.8rem 2rem;margin-bottom:3rem;}
+  .section-label{font-size:0.75rem;letter-spacing:0.26em;font-style:normal;font-weight:400;color:var(--gold-light);margin-bottom:1.2rem;display:block;text-transform:uppercase;}
+  .rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 2rem;}
+  .rule-item{font-size:1rem;color:var(--cream);font-weight:300;line-height:1.6;padding-left:1rem;border-left:1.5px solid var(--gold);}
+  .rule-item strong{font-weight:400;display:block;font-size:0.78rem;color:var(--gold-light);margin-bottom:0.1rem;letter-spacing:0.1em;text-transform:uppercase;font-style:normal;}
+  .reels-list{display:flex;flex-direction:column;gap:1.2rem;}
+  .reel-card{background:#fff;border:0.5px solid var(--cream-dark);border-radius:12px;overflow:hidden;transition:border-color 0.2s;}
+  .reel-card:hover{border-color:var(--gold-light);}
+  .reel-header{display:flex;align-items:center;gap:1.2rem;padding:1.3rem 1.6rem;background:var(--cream);cursor:pointer;user-select:none;}
+  .reel-num{font-size:2.2rem;font-weight:300;font-style:italic;color:var(--gold);line-height:1;min-width:2.2rem;text-align:center;}
+  .reel-title-block{flex:1;}
+  .reel-title{font-size:1.15rem;font-weight:400;letter-spacing:0.04em;color:var(--green);}
+  .reel-goal{font-size:0.95rem;color:var(--text-muted);margin-top:0.15rem;font-weight:300;font-style:italic;}
+  .pills{display:flex;gap:0.4rem;align-items:center;}
+  .pill{font-size:0.75rem;letter-spacing:0.06em;padding:0.28rem 0.8rem;border-radius:20px;background:var(--green);color:var(--cream);font-weight:300;font-style:italic;white-space:nowrap;}
+  .pill-total{font-size:0.75rem;padding:0.28rem 0.8rem;border-radius:20px;background:var(--cream-dark);color:var(--text-muted);font-weight:300;font-style:italic;white-space:nowrap;}
+  .chevron{width:16px;height:16px;color:var(--gold);transition:transform 0.3s;flex-shrink:0;}
+  .reel-card.open .chevron{transform:rotate(180deg);}
+  .reel-body{display:none;padding:1.4rem 1.6rem 1.6rem;border-top:0.5px solid var(--cream-dark);}
+  .reel-card.open .reel-body{display:block;}
+  .frames-label{font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.9rem;display:block;font-style:normal;}
+  .frames{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.2rem;}
+  .frame{display:flex;gap:0.9rem;align-items:flex-start;padding:0.65rem 0.9rem;border-radius:8px;background:var(--cream);}
+  .frame.has-text{background:#f7f3ed;border-left:2px solid var(--gold);}
+  .frame.is-hook{background:#eaf0ec;border-left:2px solid var(--green);}
+  .frame-left{display:flex;flex-direction:column;align-items:center;gap:0.3rem;min-width:2.8rem;}
+  .frame-num{font-size:1rem;font-style:italic;color:var(--gold);text-align:center;line-height:1;}
+  .frame-sec{font-size:0.72rem;font-style:normal;color:var(--text-muted);text-align:center;white-space:nowrap;}
+  .hook-badge{font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;background:var(--green);color:var(--cream);padding:0.15rem 0.4rem;border-radius:4px;font-style:normal;white-space:nowrap;}
+  .frame-content{flex:1;}
+  .frame-text{font-size:1rem;font-weight:300;line-height:1.5;color:var(--text);}
+  .frame-onscreen{margin-top:0.35rem;display:flex;align-items:baseline;gap:0.5rem;}
+  .onscreen-label{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-style:normal;white-space:nowrap;}
+  .onscreen-text{font-size:0.92rem;font-style:italic;font-weight:300;color:var(--green);}
+  .caption-block{background:var(--green);border-radius:8px;padding:1rem 1.2rem;margin-top:0.4rem;}
+  .caption-label{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);display:block;margin-bottom:0.5rem;font-style:normal;}
+  .caption-text{font-size:1rem;font-weight:300;font-style:italic;color:var(--cream);line-height:1.65;}
+  .hashtags{margin-top:0.6rem;display:flex;flex-wrap:wrap;gap:0.4rem;}
+  .hashtag{font-size:0.82rem;font-style:italic;color:var(--gold-light);font-weight:300;}
+  .note-block{font-size:0.95rem;color:var(--text-muted);font-weight:300;font-style:italic;padding:0.6rem 0.9rem;background:var(--cream);border-radius:8px;margin-top:0.8rem;line-height:1.55;border-left:2px solid var(--gold-light);}
+  .footer-rules{margin-top:3rem;padding-top:2rem;border-top:0.5px solid var(--gold-light);}
+  .footer-rules h3{font-size:1.8rem;font-weight:300;margin-bottom:1.2rem;color:var(--green);}
+  .footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;}
+  .footer-rule{font-size:0.95rem;font-weight:300;color:var(--text);padding:0.6rem 0.9rem;background:var(--cream-dark);border-radius:6px;line-height:1.4;}
+  @media(max-width:560px){.rules-grid,.footer-grid{grid-template-columns:1fr;}.reel-header,.reel-body{padding:1.1rem;}}
+</style>
+
+<div class="wrap">
+  <div class="brand-header">
+    <h1>Reels Brief</h1>
+    <div class="subtitle">Marizav Jewelry · 7 videos · Editor guide</div>
+  </div>
+  <div class="global-rules">
+    <span class="section-label">Общий стиль</span>
+    <div class="rules-grid">
+      <div class="rule-item"><strong>Эстетика</strong>clean · premium · feminine · natural</div>
+      <div class="rule-item"><strong>Цвет</strong>светлый, чистый, натуральный, дорогой</div>
+      <div class="rule-item"><strong>Монтаж</strong>clean cut, иногда мягкий dissolve</div>
+      <div class="rule-item"><strong>Без</strong>glitch, flashy zoom, TikTok-эффектов</div>
+      <div class="rule-item"><strong>Первый кадр</strong>хук — цепляет за 1 сек, без раскачки</div>
+    </div>
+  </div>
+  <div class="reels-list" id="reels"></div>
+  <div class="footer-rules">
+    <h3>Правила монтажа</h3>
+    <div class="footer-grid" id="footer-rules"></div>
+  </div>
+</div>
+
+<script>
+const reels = [
+  {
+    num:"01", title:"Сама упаковка", goal:"Продать ощущение подарка и бренда", duration:"8 сек",
+    frames:[
+      {text:"Самый красивый кадр упаковки крупно: коробка / лента / ткань", sec:"0–1.5", hook:true},
+      {text:"Лента или ткань крупным планом — передать фактуру", sec:"1.5–2.5"},
+      {text:"Коробочка в руках или в композиции целиком", sec:"2.5–4"},
+      {text:"Карточка / наклейка / бренд-деталь крупно", sec:"4–5.5"},
+      {text:"Снова общий красивый кадр всей упаковки", sec:"5.5–6.5"},
+      {text:"Финальный самый дорогой shot упаковки", sec:"6.5–8", onscreen:"packaging matters"},
+    ],
+    caption:"The packaging is part of the gift.\nEvery order is wrapped by hand — because the unboxing moment matters just as much as the piece inside.",
+    tags:["#handmadejewelry","#marizavjewelry","#jewelrypackaging","#dutchjewelry","#giftideanederland"]
+  },
+  {
+    num:"02", title:"Упаковка + записка", goal:"Передать personal touch", duration:"10 сек",
+    frames:[
+      {text:"Крупно ручка пишет слова на записке — сразу в движении", sec:"0–1.5", hook:true},
+      {text:"Несколько слов на бумаге, макро", sec:"1.5–2.5"},
+      {text:"Кадр упаковки рядом с запиской", sec:"2.5–4"},
+      {text:"Кладёшь записку в упаковку или рядом с украшением", sec:"4–5.5"},
+      {text:"Крупно деталь упаковки: лента / ткань / карточка", sec:"5.5–7"},
+      {text:"Общий кадр всего набора", sec:"7–8.5"},
+      {text:"Финальный красивый shot", sec:"8.5–10", onscreen:"handwritten for you"},
+    ],
+    caption:"Every order comes with a handwritten note.\nBecause jewelry is personal — and the way you receive it should feel that way too.",
+    tags:["#handmadejewelry","#marizavjewelry","#personalgift","#handwrittennote","#jewellerynl"]
+  },
+  {
+    num:"03", title:"Состав упаковки", goal:"Показать состав и ценность", duration:"9 сек",
+    frames:[
+      {text:"Общий красивый кадр всего набора разложен — сразу всё видно", sec:"0–1.5", hook:true},
+      {text:"Коробочка крупно", sec:"1.5–3", onscreen:"gift packaging"},
+      {text:"Лента / ткань крупно", sec:"3–4.5"},
+      {text:"Записка или карточка крупно", sec:"4.5–6", onscreen:"handwritten note"},
+      {text:"Украшение крупно", sec:"6–7", onscreen:"jewelry"},
+      {text:"Снова весь набор красиво разложен", sec:"7–8"},
+      {text:"Финальный clean shot", sec:"8–9", onscreen:"everything packed with care"},
+    ],
+    caption:"What comes with every order: a piece made by hand, gift packaging, and a note written just for you.\nReady to give — or to keep.",
+    tags:["#handmadejewelry","#marizavjewelry","#giftready","#jewelrypackaging","#nederlandsesieraden"]
+  },
+  {
+    num:"04", title:"Создание украшения с цифрой", goal:"Показать handmade и индивидуальность", duration:"10 сек",
+    frames:[
+      {text:"Цифра крупно — в процессе, видно руку и инструмент", sec:"0–1.5", hook:true},
+      {text:"Крупный план руки / инструмента / заготовки", sec:"1.5–2.5"},
+      {text:"Деталь — как появляется цифра", sec:"2.5–4"},
+      {text:"Ещё один макро-кадр процесса", sec:"4–5.5"},
+      {text:"Почти готовое украшение", sec:"5.5–7"},
+      {text:"Готовое украшение целиком", sec:"7–8.5"},
+      {text:"Финальный hero shot изделия", sec:"8.5–10", onscreen:"your number, your piece"},
+    ],
+    caption:"Your number. Made by hand, one piece at a time.\nThis is what it looks like to turn a detail into something you'll wear for years.",
+    tags:["#handmadejewelry","#marizavjewelry","#personalisedgift","#numberjewelry","#handgemaaktsieraad"]
+  },
+  {
+    num:"05", title:"Создание украшения с камнем", goal:"Показать красоту камня и ручную работу", duration:"10 сек",
+    frames:[
+      {text:"Камень крупно — максимальный блик, самый красивый ракурс", sec:"0–2", hook:true},
+      {text:"Процесс: рука / инструмент / посадка камня", sec:"2–3.5"},
+      {text:"Макро-кадр металла и оправы", sec:"3.5–5"},
+      {text:"Камень под другим углом — ещё один блик", sec:"5–6.5"},
+      {text:"Почти готовое изделие", sec:"6.5–8"},
+      {text:"Украшение целиком", sec:"8–9"},
+      {text:"Финальный очень чистый кадр готового украшения", sec:"9–10", onscreen:"handcrafted in silver"},
+    ],
+    caption:"Stone set by hand. Every piece is shaped slowly — so it lasts.\nHandcrafted in silver in the Netherlands.",
+    tags:["#handmadejewelry","#marizavjewelry","#gemstonejewelry","#silverjewelry","#handgemaaktsieraad"]
+  },
+  {
+    num:"06", title:"До / после: от детали к украшению", goal:"Дать satisfying transformation", duration:"8 сек",
+    frames:[
+      {text:"Raw detail крупно — заготовка, текстура металла, что-то незаконченное", sec:"0–1.5", hook:true},
+      {text:"Ещё один процессный макро-кадр", sec:"1.5–2.5"},
+      {text:"Переход к почти готовому изделию", sec:"2.5–4"},
+      {text:"Готовое украшение крупно", sec:"4–5.5"},
+      {text:"Украшение целиком", sec:"5.5–7"},
+      {text:"Финальный самый красивый shot", sec:"7–8", onscreen:"from detail to piece"},
+    ],
+    caption:"From raw material to finished piece — made step by step, entirely by hand.\nThis is what slow jewelry looks like.",
+    tags:["#handmadejewelry","#marizavjewelry","#jewelrymaking","#slowjewelry","#handgemaaktsieraad"],
+    note:"Хороший формат для досмотров — есть трансформация"
+  },
+  {
+    num:"07", title:"Украшение + упаковка как подарок", goal:"Продать весь gift experience", duration:"9 сек",
+    frames:[
+      {text:"Украшение + упаковка вместе — самый красивый общий кадр", sec:"0–2", hook:true},
+      {text:"Крупно украшение", sec:"2–3.5"},
+      {text:"Крупно упаковка", sec:"3.5–5"},
+      {text:"Записка / карточка / бренд-деталь", sec:"5–6.5"},
+      {text:"Снова общий gift set shot", sec:"6.5–7.5"},
+      {text:"Финальный эстетичный кадр", sec:"7.5–9", onscreen:"a gift that feels personal"},
+    ],
+    caption:"A gift that feels personal — because it is.\nHandmade jewelry, wrapped with care, with a note written just for them.",
+    tags:["#handmadejewelry","#marizavjewelry","#giftidea","#jewelrygift","#cadeauidee"],
+    note:"Лучше продаёт идею покупки на подарок, а не просто изделие"
+  }
+];
+
+const footerRules=[
+  "Хук — первые 1.5 сек самые сильные",
+  "После хука темп чуть медленнее — дать рассмотреть",
+  "Финальный кадр держать дольше — там текст",
+  "Больше крупных планов: металл, камень, фактура, лента",
+  "Не ставить подряд одинаковые ракурсы",
+  "Текст на экране минимальный",
+  "Монтаж clean — без дешёвых эффектов",
+  "Ролик должен выглядеть дорого, не «хендмейд-маркет»"
+];
+
+const container=document.getElementById('reels');
+reels.forEach(reel=>{
+  const card=document.createElement('div');
+  card.className='reel-card';
+  const framesHtml=reel.frames.map((f,j)=>`
+    <div class="frame${f.hook?' is-hook':f.onscreen?' has-text':''}">
+      <div class="frame-left">
+        <div class="frame-num">${j+1}</div>
+        <div class="frame-sec">${f.sec}</div>
+        ${f.hook?`<div class="hook-badge">hook</div>`:''}
+      </div>
+      <div class="frame-content">
+        <div class="frame-text">${f.text}</div>
+        ${f.onscreen?`<div class="frame-onscreen"><span class="onscreen-label">текст</span><span class="onscreen-text">${f.onscreen}</span></div>`:''}
+      </div>
+    </div>`).join('');
+  card.innerHTML=`
+    <div class="reel-header" onclick="toggle(this.parentElement)">
+      <div class="reel-num">${reel.num}</div>
+      <div class="reel-title-block">
+        <div class="reel-title">${reel.title}</div>
+        <div class="reel-goal">${reel.goal}</div>
+      </div>
+      <div class="pills">
+        <span class="pill">${reel.duration}</span>
+      </div>
+      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="reel-body">
+      <span class="frames-label">По кадрам</span>
+      <div class="frames">${framesHtml}</div>
+      ${reel.note?`<div class="note-block">${reel.note}</div>`:''}
+      <div class="caption-block">
+        <span class="caption-label">Подпись к ролику</span>
+        <div class="caption-text">${reel.caption.replace(/\n/g,'<br>')}</div>
+        <div class="hashtags">${reel.tags.map(t=>`<span class="hashtag">${t}</span>`).join('')}</div>
+      </div>
+    </div>`;
+  container.appendChild(card);
+});
+
+const footerEl=document.getElementById('footer-rules');
+footerRules.forEach(r=>{
+  const el=document.createElement('div');
+  el.className='footer-rule';
+  el.textContent=r;
+  footerEl.appendChild(el);
+});
+
+function toggle(card){card.classList.toggle('open');}
+</script>
